@@ -24,137 +24,61 @@ main* mypackage/
 ```
 $ ./main  # does not do anything
 ```
-
-
-
-### Example 2
+A package can be split into multiple source files. They are treated as a *single* source file.
 
 ```pony
-// main.pony
+// mypackage/main.pony
 
 actor Main
 	new create(env: Env) =>
-		Blue.say(env)
-		Red.say(env)
+		Extra.say(env)
 ```
-```
-// blue.pony
+```pony
+// mypackage/extra.pony
 
-primitive Blue
+primitive Extra
 	fun say(env: Env) =>
-		env.out.print("Blue")
+		env.out.print("Extra says hi!")
 ```
 ```
-// red.pony
-
-primitive Red
-	fun say(env: Env) =>
-		env.out.print("Red")
-```
-```
-$ ponyc 
-```
-```
-$ ls -F
-ex2*  main.pony blue.pony red.pony
-```
-```
-$ ./ex2
-Blue
-Red
-```
-
-A package can be split into multiple source files, the compiler treats the package code as if it were from a *single* source file.
-
-### Example 3
-```
-// main.pony
-
-actor Main
-	new create(env: Env) =>
-		Blue.say(env)
-		Red.say(env)
-
-primitive Blue
-	fun say(env: Env) =>
-		env.out.print("Blue")
-
-primitive Red
-	fun say(env: Env) =>
-		env.out.print("Red")
-```
-```
-$ ponyc 
-```
-```
-$ ls -F
-ex3*  main.pony
-```
-```
-$ ./ex3
-Blue
-Red
-```
-Same package as example 2.
-
-### Example 4
-
-```
-$ mkdir -p ex4/p1
-```
-```
-// p1/main.pony
-
-actor Main
-	new create(env: Env) =>
-		None
-```
-```
-$ ponyc -b runme p1/
-```
-```
-$ ls -F
-runme* p1/
-```
-```
-$ ./runme
-```
-Compiling the package from outside the package directory and giving the binary a new name.
-
-### Example 5
-
-```
-$ mkdir -p ex5/yellow ex5/red/tomato
-```
-```
-// yellow/main.pony
-
-use "tomato"
-
-actor Main
-	new create(env: Env) =>
-		Tomato.say(env)
-```
-
-```
-// red/tomato/tomato.pony
-
-primitive Tomato
-	fun say(env: Env) =>
-		env.out.print("Tomato")
-```
-
-```
-$ ponyc -b main --path red/ yellow/
-```
-```
-$ ls -F
-main* yellow/ red/
+$ ponyc -b main mypackage/
 ```
 ```
 $ ./main
-Tomato
+Extra says hi!
 ```
+Other packages can be used by using the `use` statement.
+
+```
+$ mkdir -p mypackage/otherpackage
+```
+
+```pony
+// mypackage/main.pony
+
+use "otherpackage"
+
+actor Main
+	new create(env: Env) =>
+		Other.say(env)
+```
+
+```pony
+// mypackage/otherpackage/other.pony
+
+primitive Other
+	fun say(env: Env) =>
+		env.out.print("Hello from Other in otherpackage")
+```
+
+```
+$ ponyc -b main mypackage/
+```
+```
+$ ./main
+Hello from Other in otherpackage
+```
+
  Given `use "tomato"` and the compiler flag `--path red/`  the compiler tries to find the package `tomato`  relative to the "package path" `red/` (i.e `red/tomato`)
  
 ### Example 6
