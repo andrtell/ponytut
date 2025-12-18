@@ -77,7 +77,7 @@ $ ./main
 Hello from Other in otherpackage
 ```
 
-If the other package is not in a sub-directory of the compilation target package being compiled we need to tell `ponyc` how to find it.
+If the other package is not in a sub-directory of the package targeted for compilation (as in `ponyc mypackage/`) we need to tell `ponyc` how to find it.
 
 ```
 $ mkdir -p vendor/somerepo/somepackage
@@ -109,7 +109,7 @@ $ ./main
 Hello from Some in somepackage
 ```
 
-The `use` statement also allows for relative paths. The above example could also be written as:
+The `use` statement also works with relative paths. The above example could also be written as:
 
 ```pony
 // mypackage/main.pony
