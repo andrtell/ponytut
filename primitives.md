@@ -10,7 +10,7 @@ primitive Blue
 
 A Primitive only ever have 1 instance (they are singeltons).
 
-```
+```pony
 primitive Unicorn
 
 actor Main
@@ -26,7 +26,7 @@ Same!
 
 Primitives can have functions.
 
-```
+```pony
 primitive Snowflake
 	fun speak(env: Env) =>
 		env.out.print("I am special!")
@@ -42,12 +42,13 @@ I am special!
 
 Type unions + Primitives = Enumerations.
 
-```
+```pony
 type Color is (Red | Green | Blue)
 ```
+
 Primitives can be used in `match` expressions.
 
-```
+```pony
 primitive Yes
 primitive No
 
