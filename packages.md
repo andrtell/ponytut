@@ -77,7 +77,7 @@ $ ./main
 Hello from Other in otherpackage
 ```
 
-If the other package is not in a sub-directory of the package targeted for compilation (as in `ponyc mypackage/`) we need to tell `ponyc` how to find it.
+If the other package is not in a sub-directory of the package that is the compilation target (as in `ponyc mypackage/`) we need to tell `ponyc` how to find it.
 
 ```
 $ mkdir -p vendor/somerepo/somepackage
