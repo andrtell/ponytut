@@ -1,6 +1,4 @@
-# My Pony Tutorial
-
-## A. Packages and paths
+# Packages and paths
 
 Pony code is organised into **packages**. Each package corresponds to a directory (i.e `mypackage/`). 
 
