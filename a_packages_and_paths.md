@@ -2,42 +2,34 @@
 
 ## A. Packages and paths
 
+Pony code is organised into **packages**. Each package corresponds to a directory (i.e `mypackage/`). 
 
-### Example 1
-
 ```
-$ mkdir ex1 & cd ex1
+$ mkdir mypackage
 ```
-```
-// main.pony
+```pony
+// mypackage/main.pony
 
 actor Main
 	new create(env: Env) =>
 		None
 ```
 ```
-$ ponyc 
+$ ponyc -b main mypackage/
 ```
 ```
 $ ls -F
-ex1*  main.pony
+main* mypackage/
 ```
 ```
-$ ./ex1
+$ ./main  # does not do anything
 ```
-```
-$ echo $?
-0
-```
-Pony code is organised into **packages**. 
 
-A package corresponds to a directory (i.e `ex1/`). 
 
-Sub-directories are *NOT* are not included.
 
 ### Example 2
 
-```
+```pony
 // main.pony
 
 actor Main
