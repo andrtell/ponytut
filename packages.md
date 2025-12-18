@@ -1,4 +1,4 @@
-# Packages and paths
+# Packages
 
 Pony code is organised into **packages**. Each package corresponds to a directory (i.e `mypackage/`). 
 
