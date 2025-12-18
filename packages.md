@@ -6,7 +6,7 @@ Pony code is organised into **packages**. Each package corresponds to a director
 $ mkdir mypackage
 ```
 ```pony
-// mypackage/main.pony
+// ./mypackage/main.pony
 
 actor Main
 	new create(env: Env) =>
@@ -25,14 +25,14 @@ $ ./main  # does not do anything
 A package can be split into multiple source files. They are treated as a *single* source file.
 
 ```pony
-// mypackage/main.pony
+// ./mypackage/main.pony
 
 actor Main
 	new create(env: Env) =>
 		Extra.say(env)
 ```
 ```pony
-// mypackage/extra.pony
+// ./mypackage/extra.pony
 
 primitive Extra
 	fun say(env: Env) =>
@@ -52,7 +52,7 @@ $ mkdir -p mypackage/otherpackage
 ```
 
 ```pony
-// mypackage/main.pony
+// ./mypackage/main.pony
 
 use "otherpackage"
 
@@ -62,7 +62,7 @@ actor Main
 ```
 
 ```pony
-// mypackage/otherpackage/other.pony
+// ./mypackage/otherpackage/other.pony
 
 primitive Other
 	fun say(env: Env) =>
@@ -84,7 +84,7 @@ $ mkdir -p vendor/somerepo/somepackage
 ```
 
 ```pony
-// mypackage/main.pony
+// ./mypackage/main.pony
 
 use "somepackage"
 
@@ -94,7 +94,7 @@ actor Main
 ```
 
 ```pony
-// vendor/somerepo/somepackage/some.pony
+// ./vendor/somerepo/somepackage/some.pony
 
 primitive Some
 	fun say(env: Env) =>
