@@ -79,52 +79,34 @@ $ ./main
 Hello from Other in otherpackage
 ```
 
- Given `use "tomato"` and the compiler flag `--path red/`  the compiler tries to find the package `tomato`  relative to the "package path" `red/` (i.e `red/tomato`)
- 
-### Example 6
- 
-```
-$ mkdir -p ex6/one/two/three
-```
-```
-// one/main.pony
+If the other package is not in a sub-directory of the compilation target package being compiled we need to tell `ponyc` how to find it.
 
-use "two"
-use "two/three"
+```
+$ mkdir -p vendor/somerepo/somepackage
+```
+
+```pony
+// mypackage/main.pony
+
+use "somepackage"
 
 actor Main
 	new create(env: Env) =>
-		A.say(env)
-		B.say(env)		 
+		Some.say(env)
 ```
 
-```
-// one/two/a.pony
+```pony
+// vendor/somerepo/somepackage/some.pony
 
-primitive A
+primitive Some
 	fun say(env: Env) =>
-		env.out.print("Two.A")
+		env.out.print("Hello from Some in somepackage")
 ```
 
 ```
-// one/two/three/b.pony
-
-primitive B
-	fun say(env: Env) =>
-		env.out.print("Three.B")
-```
-```
-$ ponyc -b main one/
-```
-```
-$ ls -F
-main* one/
+$ ponyc -b main -p vendor/somerepo mypackage/
 ```
 ```
 $ ./main
-Two.A
-Three.B
+Hello from Some in somepackage
 ```
-
-The target package (`one/`) is always on the path. The packages `two` and `three` can be found without adding anything to the pony path. Note `use "two/three"` here.
- 
