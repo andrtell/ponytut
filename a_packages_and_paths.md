@@ -110,3 +110,22 @@ $ ponyc -b main -p vendor/somerepo mypackage/
 $ ./main
 Hello from Some in somepackage
 ```
+
+The `use` statement also allows for relative paths. The above example could also be written as:
+
+```pony
+// mypackage/main.pony
+
+use "../vendor/somerepo/somepackage"
+
+actor Main
+	new create(env: Env) =>
+		Some.say(env)
+```
+```
+$ ponyc -b main mypackage/  # no -p flag here
+```
+```
+$ ./main
+Hello from Some in somepackage
+```
