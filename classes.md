@@ -88,7 +88,7 @@ A constructor can set the reference capability of a new instances.
 class Button
   var label: String
 
-  new ref create_ref() => // 'ref' is the default. Redundant here.
+  new ref create_ref() => // 'ref': make instance mutable. Redundant here since it is the default.
     label = "Do not press"
 
   new val create_val() => // 'val': make instance immutable.
