@@ -105,8 +105,8 @@ actor Main
 Functions (aka. methods) are introduces with the keyword `fun`.
 
 ```pony
-class Label
-    var name: String = "Fragile"
+class Person
+    var name: String = "Lisa"
 
     fun get_name(): String =>
         name
@@ -117,7 +117,11 @@ class Label
 actor Main
     new create(env: Env) =>
         let lb = Label
-        lb.set_name("Sturdy")
+        lb.set_name("Bob")
         let name = lb.get_name()
         env.out.print("Name is: " + name)
+```
+```
+$ ./main
+Name is: Bob
 ```
