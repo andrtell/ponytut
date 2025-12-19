@@ -1,6 +1,6 @@
 # Actors
 
-Actors have behaviours and are introduced by the keyword `be`.
+Actors have behaviours that are introduced by the keyword `be`.
 
 When you call a behavior on an actor, you are sending it a message.
 
