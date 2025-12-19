@@ -8,7 +8,7 @@ primitive Green
 primitive Blue
 ```
 
-A Primitive only ever have 1 instance (they are singeltons).
+A Primitive has at most 1 instance (they are singeltons).
 
 ```pony
 primitive Unicorn
