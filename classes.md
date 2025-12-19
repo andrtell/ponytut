@@ -54,7 +54,7 @@ class Thing
 
 actor Main
 	new create(env: Env) =>
-		let t = Thing.create()  # works!
+		let t = Thing.create()  // works!
 ```
 
 There is some sugar to invoke constructors named `create`.
@@ -68,6 +68,6 @@ let u = Town(17)  // same as: Town.create(1731)
 ```pony
 let q = Town(32, "York")  // same as: Town.create(32, "York")
 ```
-```
+```pony
 // and so on ...
 ```
