@@ -82,7 +82,7 @@ let q = Town(32, "York")  // same as: Town.create(32, "York")
 // and so on ...
 ```
 
-A constructor can set the reference capability of a new instances.
+A constructor can set the reference capability for new instances.
 
 ```pony
 class Button
