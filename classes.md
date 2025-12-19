@@ -20,9 +20,9 @@ class Town
 	var population: U64 = 0
 ```
 
-We can make a field read-only by using the `let` keyword.
+We can make a single field read-only by using the `let` keyword.
 
-```
+```pony
 class Button
 	let label: String = "Do no press"
 
@@ -63,7 +63,7 @@ actor Main
 		let t = Thing.create()  // works!
 ```
 
-Pony offers a shorthand for the `create` constructor.
+Pony offers a shorthand (sugar) for the `create` constructor.
 
 ```pony
 let t = Town  // same as: Town.create()
@@ -78,7 +78,7 @@ let q = Town(32, "York")  // same as: Town.create(32, "York")
 // and so on ...
 ```
 
-We can set the reference capability of new instances by changing the constructor.
+A constructor can set the reference capability of a new instances.
 
 ```pony
 class Button
