@@ -116,9 +116,9 @@ class Person
 
 actor Main
     new create(env: Env) =>
-        let lb = Label
-        lb.set_name("Bob")
-        let name = lb.get_name()
+        let p = Person
+        p.set_name("Bob")
+        let name = p.get_name()
         env.out.print("Name is: " + name)
 ```
 ```
