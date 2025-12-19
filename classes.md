@@ -21,7 +21,7 @@ class Town
 ```
 Constructors are introduced using the keyword `new`.
 
-```
+```pony
 class Color
 	var name: String
 	
