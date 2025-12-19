@@ -1,10 +1,12 @@
 # Actors
 
-Actors have behaviours that are introduced by the keyword `be`.
-
-When you call a behavior on an actor, you are sending it a message.
+Actors are like classes, unlike classes, actors have behaviours that are introduced by the keyword `be`.
 
 Behaviours can be called on a receiver of any reference capability.
+
+Actors are sequential. The code within a single actor (instance) is never run concurrently. 
+
+Behaviours are asynchronous and behaviours from diffrent agents (instances) run concurrently.
 
 ```pony
 actor Store
@@ -24,30 +26,5 @@ actor Main
 ```
 ```
 $ ./main
-1
-```
-
-Behaviours are asynchronous, you can run many behaviours at the same time. 
-
-Actors themselves, however, are sequential.
-
-This means all the code in an actor can be written without caring about concurrency.
-
-```pony
-actor Numbers
-    be zero(env: Env) =>
-      one(env) // returns None, guaranteed to run (sometime) after zero() is done.
-      env.out.print("Zero")
-
-    be one(env: Env) =>
-      env.out.print("1")
-
-actor Main
-    new create(env: Env) =>
-      Numbers.zero(env)
-```
-```
-$ ./main
-Zero
 1
 ```
