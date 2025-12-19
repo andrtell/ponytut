@@ -99,7 +99,7 @@ class Button
 actor Main
   new create(env: Env) =>
     let b1 = Button.create_ref()
-    b1.label = "Press me"  // works
+    b1.label = "Press me"  // works!
 
     let b2 = Button.create_val()
     b2.label = "Press me" // Oh no! Will not compile.
