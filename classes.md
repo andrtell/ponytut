@@ -29,7 +29,7 @@ class Button
 actor Main
 	new create(env: Env) =>
 		let btn = Button
-		btn.label = "Press me" // oh no! This will not compile.
+		btn.label = "Press me" // oh no! Will not compile.
 ```
 Constructors are introduced using the keyword `new`.
 
@@ -40,17 +40,21 @@ class Color
 	new blue() =>
 		 name = "Blue"
 	
-	new create(name': String) =>
+	new named(name': String) =>
 		name = name'
 		
 actor Main
 	new create(env: Env) =>
-		let c = Color.blue()
-		env.out.print("The color is: " + c.name)
+		let c1 = Color.blue()
+		env.out.print("The color is: " + c1.name)
+
+		let c2 = Color.named("Orange")
+		env.out.print("The color is: " + c2.name)
 ```
 ```
 $ ./main
 The color is: Blue
+The color is: Orange
 ```
 
 If no constructor is given; a default constructor with zero arguments called `create` is generated.
@@ -84,10 +88,10 @@ A constructor can set the reference capability of a new instances.
 class Button
   var label: String
 
-  new ref create_ref() => // ref is the default. Redundant here.
+  new ref create_ref() => // 'ref' is the default. Redundant here.
     label = "Do not press"
     
-  new val create_val() => // 'val': make  instance immutable.
+  new val create_val() => // 'val': make instance immutable.
     label = "Do not press"
 
   // and so on ...
@@ -98,7 +102,7 @@ actor Main
     b1.label = "Press me"  // works
     
     let b2: Button = Button.create_val()
-    b2.label = "Press me" // Oh no! This will not compile.
+    b2.label = "Press me" // Oh no! Will not compile.
 
 ```
 
