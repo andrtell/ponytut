@@ -1,3 +1,11 @@
+# Reference capability
+
+A reference capability is a form of type qualifier.
+
+Every use of a type has a reference capability. 
+
+Capabilities apply to variables, not to the type as a whole.
+
 ```pony
 actor A
   be send(env: Env, cnt: U64 val) =>
