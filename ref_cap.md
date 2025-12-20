@@ -8,7 +8,26 @@
 
 ## Mutable reference capabilities
 
-If _no other_ `actor` is able to read or write to an object, we should be able to write to _and_ read from that object without having to worry about concurrency. 
+A `ref` variable can be written to, read from and aliased, but never shared with another `actor` (unless demoted to `tag`).
+
+```pony
+class Data
+  var n: U64 = 1
+
+actor Main
+  new create(env: Env) =>
+    var x: Data ref = Data
+
+    x.n = 99  // written to
+
+    if x.n > 1 then // read from
+      env.out.print("works!")
+    end
+
+    var y: Data ref = x 
+    var z: Data ref = y // aliased
+```
+
 
 ```pony
 actor A
