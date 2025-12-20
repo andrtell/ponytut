@@ -1,10 +1,10 @@
 # Reference capability
 
-A reference capability is a form of type qualifier.
+1) Isolated data + Immutable data = concurrent programs without locks.
 
-Every use of a type has a reference capability. 
+2) Type qualifier(s) + Variable(s) = Reference capabilities.
 
-Capabilities apply to variables, not to the type as a whole.
+3) The Pony compiler ensures 1) by using 2).
 
 ```pony
 actor A
