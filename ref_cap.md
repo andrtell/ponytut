@@ -8,7 +8,7 @@
 
 ## Mutable reference capabilities
 
-A `ref` variable can be written to, read from and aliased, but never shared with another `actor` (unless demoted to `tag`).
+A `ref` variable can be written to, read from and aliased, but never shared with another `actor` as is.
 
 ```pony
 class Data
