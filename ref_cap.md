@@ -6,6 +6,10 @@
 
 3) The Pony compiler ensures 1) by using 2).
 
+## Mutable reference capabilities
+
+If _no other_ `actor` is able to read or write to an object, we should be able to write to _and_ read from that object without having to worry about concurrency. 
+
 ```pony
 actor A
   be send(env: Env, cnt: U64 val) =>
