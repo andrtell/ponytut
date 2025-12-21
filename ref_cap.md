@@ -8,7 +8,11 @@
 
 ## Mutable reference capabilities
 
-A `ref` variable can be written to, read from and aliased, but never shared with another `actor` as is.
+A `ref` can be written to and read from.
+ 
+A `ref` can be aliased by another `ref`, `box` or `tag`. 
+
+A `ref` is _not_ sendable.
 
 ```pony
 class Data
@@ -20,12 +24,14 @@ actor Main
 
     x.n = 99  // written to
 
-    if x.n > 1 then // read from
+    if x.n > 1 then  // read from
       env.out.print("works!")
     end
 
     var y: Data ref = x 
-    var z: Data ref = y // aliased
+    var z: Data box = y
+    var t: Data tag = z // aliased
+
 ```
 
 
