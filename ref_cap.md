@@ -30,7 +30,7 @@ actor Main
       env.out.print("works!")
     end
 
-    // many aliases
+    // aliases
     var y: Data ref = x // ref -> ref
     var z: Data box = x // ref -> box
     var t: Data tag = x // ref -> tag
@@ -49,7 +49,7 @@ class Data
 
 actor Main
   new create(env: Env) =>
-    var x: Data trn = Data // ref^ -> trn
+    var x: Data trn = Data // trn <- ref^ <- constructor (defaults to ref^ for class)
 
     // write
     x.n = 99
@@ -59,9 +59,9 @@ actor Main
       env.out.print("works!")
     end
 
-    // many read-only aliases
-    var y: Data box = x // trn -> box
-    var t: Data tag = x // trn -> tag
+    // only read-only aliases
+    var y: Data box = x // box <- trn
+    var t: Data tag = x // tag <- trn
 ```
 
 `iso` can be written to and read from.
@@ -76,7 +76,7 @@ class Data
 
 actor Main
   new create(env: Env) =>
-    var x: Data iso = Data // ref^ -> iso
+    var x: Data iso = Data // iso <- ref^ <- constructor (defaults to ref^ for class)
 
     // write
     x.n = 99
@@ -86,9 +86,9 @@ actor Main
       env.out.print("works!")
     end
 
-    // many opaque aliases
-    var t: Data tag = x // iso -> tag
-    var q: Data tag = x // iso -> tag
+    // only opaque aliases
+    var t: Data tag = x // tag <- iso
+    var q: Data tag = x // tag <- iso
 ```
 
 `iso^` can be aliased by any RC.
@@ -105,7 +105,7 @@ actor Other
 
 actor Main
   new create(env: Env) =>
-    var x: Data iso = Data // iso <- ref^ <- constructor
+    var x: Data iso = Data // iso <- ref^ <- constructor (defaults to ref^ for class)
 
     var a: Data ref = consume x // ref <- iso^ <- consume iso
 
