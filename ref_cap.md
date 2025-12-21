@@ -20,7 +20,7 @@ class Data
 
 actor Main
   new create(env: Env) =>
-    var x: Data ref = Data // ref^ -> ref
+    var x: Data ref = Data // ref <- ref^ <- constructor (defaults to ref^ for class)
 
     // write
     x.n = 99
@@ -31,9 +31,9 @@ actor Main
     end
 
     // aliases
-    var y: Data ref = x // ref -> ref
-    var z: Data box = x // ref -> box
-    var t: Data tag = x // ref -> tag
+    var y: Data ref = x // ref <- ref
+    var z: Data box = x // box <- ref
+    var t: Data tag = x // tag <- ref
 
 ```
 
