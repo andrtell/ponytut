@@ -8,11 +8,11 @@
 
 ## Mutable reference capabilities
 
-A `ref` can be written to and read from.
+`ref` can be written to and read from.
  
-A `ref` can be aliased by another `ref`, `box` or `tag`. 
+`ref` can be aliased by another `ref`, `box` or `tag`. 
 
-A `ref` is _not_ sendable.
+`ref` is _not_ sendable.
 
 ```pony
 class Data
