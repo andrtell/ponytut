@@ -93,7 +93,7 @@ actor Main
 
 `iso^` can be aliased by any RC.
 
-`iso^` _is_ sendable.
+`iso^` _is_ sendable. Can be passed but not shared.
 
 ```pony
 class Data
