@@ -10,7 +10,7 @@
 
 `ref` can be written to and read from.
  
-`ref` can be aliased by another `ref`, `box` or `tag`. 
+`ref` can be aliased by a `ref`, `box` or `tag`. 
 
 `ref` is _not_ sendable.
 
@@ -20,7 +20,7 @@ class Data
 
 actor Main
   new create(env: Env) =>
-    var x: Data ref = Data
+    var x: Data ref = Data // ref^
 
     x.n = 99  // written to
 
@@ -28,11 +28,41 @@ actor Main
       env.out.print("works!")
     end
 
-    var y: Data ref = x 
-    var z: Data box = y
-    var t: Data tag = z // aliased
+    var y: Data ref = x // aliased
+    var z: Data box = x
+    var t: Data tag = x 
 
 ```
+
+`trn` can be written to and read from.
+ 
+`trn` can be aliased by a `box` or `tag`. 
+
+`trn` is _not_ sendable.
+
+```pony
+class Data
+  var n: U64 = 1
+
+actor Main
+  new create(env: Env) =>
+    var x: Data trn = Data // ref^
+
+    x.n = 99  // written to
+
+    if x.n > 1 then  // read from
+      env.out.print("works!")
+    end
+
+    var y: Data box = x // aliased
+    var t: Data tag = x
+```
+
+
+
+
+
+
 
 
 ```pony
