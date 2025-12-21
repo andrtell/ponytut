@@ -105,13 +105,11 @@ actor Other
 
 actor Main
   new create(env: Env) =>
-    var x: Data iso = Data // ref^
+    var x: Data iso = Data // iso <- ref^ <- constructor
 
-    var a: Data ref = consume x // iso -> iso^ (-> ref^)
+    var a: Data ref = consume x // ref <- iso^ <- consume iso
 
-    var y: Data iso = Data // ref^
+    var y: Data iso = Data
 
-    var z: Data iso = y = Data // destructive read
-
-    Other.send(consume z) // iso -> iso^ (-> iso)
+    Other.send(y = Data) // iso <- iso^ <- destructive read (old y passed)
 ```
