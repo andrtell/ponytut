@@ -111,5 +111,5 @@ actor Main
 
     var y: Data iso = Data // ref^ -> iso
 
-    Other.send(consume y) // iso (-> iso^) -> iso
+    Other.send(consume y) // iso (-> iso^) -> iso (since receiver takes `iso`)
 ```
