@@ -58,6 +58,29 @@ actor Main
     var t: Data tag = x
 ```
 
+`iso` can be written to and read from.
+ 
+`iso` can be aliased by a `tag`.
+
+`iso` is _not_ sendable.
+
+```pony
+class Data
+  var n: U64 = 1
+
+actor Main
+  new create(env: Env) =>
+    var x: Data iso = Data // ref^
+
+    x.n = 99  // written to
+
+    if x.n > 1 then  // read from
+      env.out.print("works!")
+    end
+
+    var t: Data tag = x // aliased
+```
+
 
 
 
