@@ -64,7 +64,7 @@ actor Main
     var t: Data tag = x // tag <- trn
 ```
 
-`trn^` can be aliased by `trn`, `ref`, `val` or `tag`.
+`trn^` can be aliased by `trn`, `ref`, `box`, `val` or `tag`.
 
 `trn^` is sendable if aliased by `val` or `tag` (on receiving side).
 
