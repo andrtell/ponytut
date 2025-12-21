@@ -107,7 +107,7 @@ actor Main
   new create(env: Env) =>
     var x: Data iso = Data // ref^ -> iso
 
-    var a: Data ref = consume x // iso (-> iso^) -> ref
+    var a: Data ref = consume x // iso (-> iso^) -> ref (any RC will do)
 
     var y: Data iso = Data // ref^ -> iso
 
