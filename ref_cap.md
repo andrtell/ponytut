@@ -64,6 +64,34 @@ actor Main
     var t: Data tag = x // tag <- trn
 ```
 
+`trn^` can be aliased by `trn`, `ref`, `val` or `tag`.
+
+`trn^` is sendable if aliased by `val` or `tag` (on receiving side).
+
+```pony
+class Data
+  var n: U64 = 1
+
+actor Other
+  be send(q: Data val) =>
+    None
+
+actor Main
+  new create(env: Env) =>
+    var x: Data trn = Data // trn <- ref^ <- constructor
+
+    var a: Data trn = consume x // trn <- trn^ <- consume trn
+
+    var y: Data trn = Data
+
+    var b: Data ref = consume y // ref <- trn^ <- consume trn
+
+    var z: Data trn = Data
+
+    Other.send(z = Data) // val <- trn^ <- destructive read (old z passed)
+```
+
+
 `iso` can be written to and read from.
  
 `iso` can be aliased by a `tag`.
@@ -93,7 +121,7 @@ actor Main
 
 `iso^` can be aliased by any RC.
 
-`iso^` _is_ sendable. Can be passed but not shared.
+`iso^` _is_ sendable.
 
 ```pony
 class Data
