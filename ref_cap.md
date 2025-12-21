@@ -59,7 +59,7 @@ actor Main
       env.out.print("works!")
     end
 
-    // only read-only aliases
+    // only read aliases
     var y: Data box = x // box <- trn
     var t: Data tag = x // tag <- trn
 ```
