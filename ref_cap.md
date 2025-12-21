@@ -1,4 +1,4 @@
-# Reference capability
+# Reference capability (RC)
 
 1) Isolated data + Immutable data = concurrent programs without locks.
 
@@ -20,17 +20,20 @@ class Data
 
 actor Main
   new create(env: Env) =>
-    var x: Data ref = Data // ref^
+    var x: Data ref = Data // ref^ -> ref
 
-    x.n = 99  // written to
+    // write
+    x.n = 99
 
-    if x.n > 1 then  // read from
+    // read
+    if x.n > 1 then  
       env.out.print("works!")
     end
 
-    var y: Data ref = x // aliased
-    var z: Data box = x
-    var t: Data tag = x 
+    // many aliases
+    var y: Data ref = x // ref -> ref
+    var z: Data box = x // ref -> box
+    var t: Data tag = x // ref -> tag
 
 ```
 
@@ -46,16 +49,19 @@ class Data
 
 actor Main
   new create(env: Env) =>
-    var x: Data trn = Data // ref^
+    var x: Data trn = Data // ref^ -> trn
 
-    x.n = 99  // written to
+    // write
+    x.n = 99
 
-    if x.n > 1 then  // read from
+    // read
+    if x.n > 1 then
       env.out.print("works!")
     end
 
-    var y: Data box = x // aliased
-    var t: Data tag = x
+    // many read-only aliases
+    var y: Data box = x // trn -> box
+    var t: Data tag = x // trn -> tag
 ```
 
 `iso` can be written to and read from.
@@ -70,67 +76,40 @@ class Data
 
 actor Main
   new create(env: Env) =>
-    var x: Data iso = Data // ref^
+    var x: Data iso = Data // ref^ -> iso
 
-    x.n = 99  // written to
+    // write
+    x.n = 99
 
-    if x.n > 1 then  // read from
+    // read
+    if x.n > 1 then
       env.out.print("works!")
     end
 
-    var t: Data tag = x // aliased
+    // many opaque aliases
+    var t: Data tag = x // iso -> tag
+    var q: Data tag = x // iso -> tag
 ```
 
+`iso^` can be aliased by any RC.
 
-
-
-
-
-
+`iso^` _is_ sendable.
 
 ```pony
-actor A
-  be send(env: Env, cnt: U64 val) =>
-    env.out.print("A: " + cnt.string())
-    send(env, cnt + 1)
+class Data
+  var n: U64 = 1
 
-actor Main
-    new create(env: Env) =>
-      A.send(env, 1)
-```
-
-```pony
-class V
-  var i: U64
-
-  new create(i': U64) =>
-    i = i'
-
-actor B
-  be send(env: Env, v: V val) =>
-    env.out.print("B: " + v.i.string())
-    send(env, V(v.i + 1))
+actor Other
+  be send(q: Data iso) =>
+    q.n = 2
 
 actor Main
   new create(env: Env) =>
-    B.send(env, V(0))
-```
+    var x: Data iso = Data // ref^ -> iso
 
-```pony
-class V
-  var i: U64
+    var a: Data ref = consume x // iso (-> iso^) -> ref
 
-  new create(i': U64) =>
-    i = i'
+    var y: Data iso = Data // ref^ -> iso
 
-actor C
-  be send(env: Env, v: V iso) =>
-    env.out.print("C: " + v.i.string())
-    v.i = v.i + 1
-    send(env, consume v)
-
-actor Main
-  new create(env: Env) =>
-    let v: V iso = V(0)
-    C.send(env, consume v)
+    Other.send(consume y) // iso (-> iso^) -> iso
 ```
