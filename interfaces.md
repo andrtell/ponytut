@@ -24,9 +24,9 @@ Nominal subtyping is introduces with the keyword `is`.
 
 
 ```pony
-interface Ping
-    fun name(): String => "Pong"
+interface Person
+    fun name(): String => "Bob"
 
-class Bob is Ping  // Bob is Ping because Bob says so.
+class Bob is Person  // Bob is Person because Bob says so.
 ```
 
